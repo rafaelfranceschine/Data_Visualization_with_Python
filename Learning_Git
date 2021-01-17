@@ -1,0 +1,17 @@
+#IMPORTING LIBRARIES
+
+import numpy as np
+import pandas as pd
+
+#--------------------------
+
+#READING FILES
+
+pd.read_excel('path',sheet_name='name')
+
+#--------------------------
+
+#DATAFRAME COMMON FUNCTIONS
+
+df.head() #first five rows of the dataframe
+df.tail() #last five rows of the dataframe
