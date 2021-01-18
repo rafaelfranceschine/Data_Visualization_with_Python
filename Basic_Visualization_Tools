@@ -43,16 +43,40 @@ mpl.style.use('name_of_the_style')     #setting a style to the plot
 
 print('Matplotlib version: ', mpl.__version__)     #printing the version of the matplotlib
 
-
+df.sort_values(['Column_Label'], ascending=False, axis=0, inplace=True)     #sorting the dataframe based on a specific column
 
 #AREA PLOT
 #--------------------------------------------------------------------------
-
-df.sort_values(['Column_Label'], ascending=False, axis=0, inplace=True)     #sorting the dataframe based on a specific column
 
 df_first5 = df.head()     #getting a dataframe which contains just the first five rows (obs.: you can also specify the columns to get)
 
 df_first5 = df_first5.transpose()     #transposing the dataframe so it can be correctly plotted
 
 df_first5.head()     #verifying if the dataframe is correct for plotting
+
+df_first5.index = df_first5.index.map(int)     #changing the index to integers for plotting
+
+df_first5.plot(kind='area',stacked=bool,figsize=(x,y))     #generating an area plot (obs.: it can be stacked or not)
+
+plt.title('Title of the chart')     #setting the title of the chart
+plt.ylabel('Title of the y label')     #setting the title of the y label
+plt.xlabel('Title of the x label')     #setting the title of the x label
+
+plt.show()     #showing the plot
+
+
+
+#PLOTTING WITH ARTIST LAYER
+#--------------------------------------------------------------------------
+
+ax = df.plot(kind='chart kind',stacked=bool,figsize=(x,y))     #returning the plotting to the object ax
+
+ax.title('Immigration Trend of Top 5 Countries')     #setting the title of the chart
+ax.ylabel('Number of Immigrants')     #setting the title of the y label
+ax.xlabel('Years')     #setting the title of the x label
+
+
+
+#HISTOGRAM PLOT
+#--------------------------------------------------------------------------
 
