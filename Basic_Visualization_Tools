@@ -9,28 +9,21 @@ import numpy as np     #importing the useful numpy scientific computing library
 df = pd.read_excel(path,sheet_name='name_of_the_sheet',skiprows=range('range_of_rows_to_skip'),skipfooter='number_of_rows_to_skip')     #reading an excel file and returning it to an object
 
 df.head()     #visualizing the first rows of the dataframe
-
 df.tail()     #visualizing the last rows of the dataframe
-
 df.shape()     #visualizing the dimensions of the dataframe
 
 df.drop(['column_name', 'column_name'], axis=1, inplace=True)     #cleaning the data that are not informative ("axis=1" is for dropping columns)
-
 df.head()     #visualizing the cleaned dataframe
 
-df.rename(columns={'OldName':'NewName', 'OldName':'NewName'}, inplace=True)     #renaming the title of the columns
-
-df.head()     #visualizing the renamed dataframe
+df.rename(columns={'OldName':'NewName', 'OldName':'NewName'}, inplace=True)     #renaming the column labels
+df.columns     #visualizing if the column labels are changed
 
 all(isinstance(column, str) for column in df.columns)     #checking if all of the titles of the columns are strings
-
 df.columns = list(map(str, df.columns))     #changing all of the column labels to strings
-
 all(isinstance(column, str) for column in df.columns)     #checking if all of the titles of the columns are now correctly strings
 
 df.set_index('ColumnLabel', inplace=True)     #setting a specific column label as the index
-
-df.head()     #checking if the index is correct
+df.head()     #checking if the index is changed
 
 df['ColumnLabel'] = df.function(axis=1)     #adding a column that is a function of all of the others (example of functions: sum, max, min)
 
@@ -48,5 +41,18 @@ import matplotlib.pyplot as plt     #importing the matplotlib.pyplot as plt
 
 mpl.style.use('name_of_the_style')     #setting a style to the plot
 
-print ('Matplotlib version: ', mpl.__version__)     #printing the version of the matplotlib
+print('Matplotlib version: ', mpl.__version__)     #printing the version of the matplotlib
+
+
+
+#AREA PLOT
+#--------------------------------------------------------------------------
+
+df.sort_values(['Column_Label'], ascending=False, axis=0, inplace=True)     #sorting the dataframe based on a specific column
+
+df_first5 = df.head()     #getting a dataframe which contains just the first five rows (obs.: you can also specify the columns to get)
+
+df_first5 = df_first5.transpose()     #transposing the dataframe so it can be correctly plotted
+
+df_first5.head()     #verifying if the dataframe is correct for plotting
 
