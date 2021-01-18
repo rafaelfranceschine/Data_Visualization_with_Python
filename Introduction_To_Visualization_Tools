@@ -1,0 +1,77 @@
+#IMPORTING LIBRARIES
+
+import numpy as np #scientific cumputing
+import pandas as pd #primary data structure
+
+%matplotlib inline 
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+
+#MANIPULATING PANDAS DATAFRAMES
+#------------------------------------------------------------------------------------------------------------
+
+#IMPORTING THE DATAFRAME
+
+import pandas as pd #primary data structure
+
+df = pd.read_format('file path')
+
+#CHECKING THE DATAFRAME
+
+df.head() #returns the first five rows of the dataframe
+df.tail() #retuns the last five rows of the dataframe
+df.shape #returns the shape of the dataframe
+df.describe() #returns statistical informations of the dataframe
+df.isnull().sum() #returns the number of null datas of the dataframe
+
+df.columns #returns the names of all of the columns
+df.columns = list(map(str, df.columns)) #converts all columns names into strings
+df[['column']] #returns a dataframe of specified columns of the dataframe
+df[(df['Title of the column']=='Filter')] #returning dataframe with a filter
+
+df.loc[['name of the row']] #returns the values of the row
+df.loc['name of the row','name of the column'] #returns the value of the data
+
+df.index.values #returns names of the indexes
+df.iloc[['number of the row']] #returns the specified row
+df.iloc['number of the row','number of the column'] #returns the value of the data
+
+#MANIPULATING THE DATAFRAME
+
+df.dropna() #drop the rows where at one element is missing
+df.drop(['column1','column2'], axis=1, inplace=True) #drop the specified columns of the dataframe
+df.replace('value_to_replace','new_value') #replace the values of the dataframe
+df.rename(columns={'OldName1':'NewName1', 'OldName2':'NewName2'}, inplace=True) #rename columns of the dataframe
+
+df.set_index('name of the column', inplace=True) #set a column as the index
+
+#GENERATING PLOTS
+#------------------------------------------------------------------------------------------------------------
+
+#GENERATING FIRST PLOT
+
+new_df = df.loc['name of the row','names of the columns'] #return the dataframe for plotting
+new_df.plot() #plotting directly with pandas
+
+#IMPORTING MATPLOTLIB
+
+%matplotlib inline 
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+
+#EDITING THE DATAFRAME FOR PLOTTING
+
+df.transpose() #transposing the dataframe for line plot
+df_CI.index = df_CI.index.map(type) #changing the type of the index values
+
+#PLOTTING
+
+new_df.plot(kind='kind of the chart') #set the plot and its kind
+
+plt.title('Title of the chart') #set the title of the chart
+plt.ylabel('Name of the y axis') #set the name of the y axis
+plt.xlabel('Name of the x axis') #set the name of the x axis
+
+plt.text(x,y,label) #add a label in the the chart
+
+plt.show() #show the chart
