@@ -6,7 +6,7 @@ import numpy as np     #importing the useful numpy scientific computing library
 
 !conda install -c anaconda xlrd --yes     #downloading pandas module that is required to read in excel files
 
-df = pd.read_excel(path,sheet_name='name_of_the_sheet',skiprows=range('range_of_rows_to_skip'),skipfooter='number_of_rows_to_skip')     #reading an excel file and returning it to an object
+df = pd.read_excel(path, sheet_name=sheetName_str, skiprows=range(range_int), skipfooter=numberOfRows_int)     #importing the dataframe from excel
 
 
 
@@ -18,12 +18,12 @@ df.tail()     #visualizing the last rows of the dataframe
 df.shape()     #visualizing the dimensions of the dataframe
 df.index     #visualizing the index of the dataframe
 
-df.drop(ColumnLabels_list,axis=1,inplace=True)     #dropping the columns that are not necessary ("axis=1" is for dropping columns)
+df.drop(ColumnLabels_list, axis=1, inplace=True)     #dropping the columns that are not necessary ("axis=1" is for dropping columns)
 
-df.rename(columns={OldLabel_str:NewLabel_str,OldLabel_str:NewLabel_str},inplace=True)     #renaming column labels
+df.rename(columns={OldLabel_str: NewLabel_str, OldLabel_str: NewLabel_str}, inplace=True)     #renaming column labels
 
-all(isinstance(column,str) for column in df.columns)     #checking if all columns labels are strings
-df.columns=list(map(str,df.columns))     #changing all of the column labels to strings
+all(isinstance(column, str) for column in df.columns)     #checking if all columns labels are strings
+df.columns = list(map(str, df.columns))     #changing all of the column labels to strings
 
 
 
@@ -32,9 +32,9 @@ df.columns=list(map(str,df.columns))     #changing all of the column labels to s
 
 df[ColumnLabel_str] = df.function(axis=1)     #adding a column that is a function of all of the others (example of functions: sum, max, min)
 
-df.sort_values([column_str],ascending=False,axis=0,inplace=True)     #sorting the dataframe based on a specific column
+df.sort_values([column_str], ascending=False, axis=0, inplace=True)     #sorting the dataframe based on a specific column
 
-list(map(str,range(first_column_int,last_column_plus_one_int)))     #creating a list of strings that contains a range of column labels (example: a range of years)
+list(map(str, range(firstColumn_int, lastColumnPlusOne_int)))     #creating a list of strings that contains a range of column labels (example: range of years)
 
 df.index = df.index.map(type)     #changing the index to another type
 
@@ -45,13 +45,15 @@ df.set_index(ColumnLabel_str, inplace=True)     #setting a specific column as th
 #CREATING NEW DATAFRAMES FOR PLOTTING
 #--------------------------------------------------------------------------
 
-new_df = df[[ColumnLabels_List]].head()     #creating a dataframe with the specified columns
+new_df = df[[ColumnLabels_List]]     #creating a dataframe with the specified columns
 
 new_df = df.head()     #creating a dataframe with the first five rows
 
 new_df = df.tail()     #creating a dataframe with the last five rows
 
 new_df = df.transpose()     #creating a new transposed dataframe
+
+new_df = df.loc[rowsList, columnsList]
 
 
 
@@ -63,18 +65,21 @@ new_df = df.transpose()     #creating a new transposed dataframe
 import matplotlib as mpl     #importing the matplotlib as mpl
 import matplotlib.pyplot as plt     #importing the matplotlib.pyplot as plt
 
-mpl.style.use('name_of_the_style')     #setting a style to the plot
+mpl.style.use(style_str)     #setting a style to the plot
 
 
 
-#SETTING THE PLOT
+#PLOTTING WITH SCRIPTING LAYER
 #--------------------------------------------------------------------------
 
-df.plot(kind=kind_str,stacked=bool,figsize=(x_int,y_int))     #generating the plot
+for name, hex in matplotlib.colors.cnames.items():     #to check the full list of available colors
+    print(name, hex)
 
-plt.title('Title of the chart')     #setting the title of the chart
-plt.ylabel('Title of the y label')     #setting the title of the y label
-plt.xlabel('Title of the x label')     #setting the title of the x label
+df.plot(kind=kind_str, stacked=bool, figsize=(x_int, y_int), alpha=float, xticks=bin_edges, color=strList)     #generating the plot
+
+plt.title(title_str)     #setting the title of the chart
+plt.ylabel(title_str)     #setting the title of the y label
+plt.xlabel(title_str)     #setting the title of the x label
 
 plt.show()     #showing the plot
 
@@ -85,27 +90,18 @@ plt.show()     #showing the plot
 
 ax = df.plot(kind='chart kind',stacked=bool,figsize=(x,y))     #returning the plotting to the object ax
 
-ax.title('Title of the chart')     #setting the title of the chart
-ax.ylabel('Title of the y label')     #setting the title of the y label
-ax.xlabel('Title of the x label')     #setting the title of the x label
+ax.title(title_str)     #setting the title of the chart
+ax.ylabel(title_str)     #setting the title of the y label
+ax.xlabel(title_str)     #setting the title of the x label
 
 
 
 #HISTOGRAM PLOT
 #--------------------------------------------------------------------------
 
-df['columnlabel'].head()     #specific column for plotting
+count, bin_edges = np.histogram(df[column_str], number_of_bins)     #getting the count and the ranges of the bins (the default number of bins is 10)
 
-df.loc[['row_index', 'row_index'], column or list of columns].transpose()     #alternative: specific rows for plotting
-
-count,bin_edges=np.histogram(df['2013'], number_of_bins)     #getting the count and the ranges of the bins (the default number of bins is 10)
-
-for name, hex in matplotlib.colors.cnames.items():     #to check the full list of available colors
-    print(name, hex)
-
-df.plot(kind='hist',figsize=(x,y),bins=int,alpha=float,xticks=bin_edges,color=[str or list of str],stacked=bool)
-                                                                                                  #plotting the histogram of the column with ticks in the bins
-
+df.plot(kind='hist', bins=numberOfBins_int, xticks=bin_edges)     #plotting the histogram of the column with ticks in the bins
 
 
 
