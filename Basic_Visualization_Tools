@@ -1,1 +1,49 @@
+#DOWNLOADING AND PREPPING DATA
+#--------------------------------------------------------------------------
+
+import pandas as pd     #importing the pandas primary data structure library
+import numpy as np     #importing the useful numpy scientific computing library
+
+!conda install -c anaconda xlrd --yes     #downloading pandas module that is required to read in excel files
+
+df = pd.read_excel(path,sheet_name=str,skiprows=range(int),skipfooter=int)     #reading an excel file and returning it to an object
+
+df.head()     #visualizing the first rows of the dataframe
+
+df.tail()     #visualizing the last rows of the dataframe
+
+df.shape()     #visualizing the dimensions of the dataframe
+
+df.drop(['column_name', 'column_name'], axis=1, inplace=True)     #cleaning the data that are not informative ("axis=1" is for dropping columns)
+
+df.head()     #visualizing the cleaned dataframe
+
+df.rename(columns={'OldName':'NewName', 'OldName':'NewName'}, inplace=True)     #renaming the title of the columns
+
+df.head()     #visualizing the renamed dataframe
+
+all(isinstance(column, str) for column in df.columns)     #checking if all of the titles of the columns are strings
+
+df.columns = list(map(str, df.columns))     #changing all of the column labels to strings
+
+all(isinstance(column, str) for column in df.columns)     #checking if all of the titles of the columns are now correctly strings
+
+df.set_index('ColumnLabel', inplace=True)     #setting a specific column label as the index
+
+df.head()     #checking if the index is correct
+
+df['ColumnLabel'] = df.function(axis=1)     #adding a column that is a function of all of the others (example of functions: sum, max, min)
+
+list(map(str,range('first','last_plus_one')))     #creating a list of strings that contains a range of column labels (example: a range of years)
+
+
+
+#VISUALIZING DATA USING MATPLOTLIB
+#--------------------------------------------------------------------------
+
+%matplotlib inline     #downloading the inline backend to generate the plots within the browser
+
+import matplotlib as mpl     #importing the matplotlib as mpl
+import matplotlib.pyplot as plt     #importing the matplotlib.pyplot as plt
+
 
