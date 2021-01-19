@@ -80,6 +80,8 @@ import matplotlib.pyplot as plt     #importing the matplotlib.pyplot as plt
 
 mpl.style.use(style_str)     #setting a style to the plot
 
+print('Matplotlib version:', mpl.__version__)     #checking the version of matplotlib
+
 for name, hex in matplotlib.colors.cnames.items():
     print(name, hex)     #checking the full list of available colors
 
