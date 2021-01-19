@@ -21,7 +21,7 @@ df = pd.read_excel(path, sheet_name=str, skiprows=range(int), skipfooter=numberO
 
 df.head()     #returning the first rows of the dataframe
 df.tail()     #returning the last rows of the dataframe
-df.shape()     #returning the dimensions of the dataframe
+df.shape     #returning the dimensions of the dataframe
 df.columns     #returning the names of all of the columns
 df.index     #returning the index of the dataframe
 df.describe()     #returning statistics of the dataframe
