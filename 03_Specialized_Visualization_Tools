@@ -56,7 +56,7 @@ df[ColumnLabel_str] = df.function(axis=1)     #adding a column that is a functio
 #CREATING VARIABLES OF THE DATAFRAME
 #--------------------------------------------------------------------------
 
-variable = list(map(str, range(firstColumn_int, lastColumnPlusOne_int)))     #creating a range of column labels (example: range of years)
+variable = list(map(str, range(firstColumn_int, lastColumnPlusOne_int)))     #creating a list that contains a range of column labels (example: range of years)
 
 
 
