@@ -64,7 +64,7 @@ variable = list(map(str, range(firstColumn_int, lastColumnPlusOne_int)))     #cr
 #--------------------------------------------------------------------------
 
 new_df = df.loc[rows_strList,columns_strList]     #creating a dataframe with the specified rows and columns
-new_df = df[[ColumnLabels_List]]     #creating a dataframe with the specified columns
+new_df = df[ColumnLabels_List]     #creating a dataframe with the specified columns
 new_df = df.head()     #creating a dataframe with the first five rows
 new_df = df.tail()     #creating a dataframe with the last five rows
 new_df = df.transpose()     #creating a new transposed dataframe
