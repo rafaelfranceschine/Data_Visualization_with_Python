@@ -38,22 +38,25 @@ df[ColumnLabels_List]     #returning a dataframe with the specified columns
 
 df.dropna()     #drop the rows where at least one element is missing
 df.drop(ColumnLabels_list, axis=1, inplace=True)     #dropping the columns that aren't necessary ("axis=1" is for columns)
-df.rename(columns={OldLabel_str: NewLabel_str, OldLabel_str: NewLabel_str}, inplace=True)     #renaming the specified column labels
-df.replace(OldValue, NewValue)     #replace the values of the dataframe
+
 df.columns = list(map(str, df.columns))     #changing all of the column labels to strings
-df.set_index(columnLabel_str, inplace=True)     #set a specific column as the index
+df.rename(columns={OldLabel_str: NewLabel_str, OldLabel_str: NewLabel_str}, inplace=True)     #renaming the specified column labels
+
+df.set_index(columnLabel_str, inplace=True)     #setting a specific column as the index
+df.index = df.index.map(type)     #changing the index to a specified type
+
 df.sort_values([columnLabel_str], ascending=False, axis=0, inplace=True)     #sorting the dataframe based on a specific column
 
-
-
-#MANIPULATING THE DATAFRAME
-#--------------------------------------------------------------------------
+df.replace(OldValue, NewValue)     #replace the specified values of the dataframe (example: replace missing data for an average value)
 
 df[ColumnLabel_str] = df.function(axis=1)     #adding a column that is a function of all of the others (example of functions: sum, max, min)
-list(map(str, range(firstColumn_int, lastColumnPlusOne_int)))     #creating a list that contains a range of column labels (example: range of years)
 
-df.set_index(ColumnLabel_str, inplace=True)     #setting a specific column as the index
-df.index = df.index.map(type)     #changing the index to another type
+
+
+#CREATING VARIABLES OF THE DATAFRAME
+#--------------------------------------------------------------------------
+
+variable = list(map(str, range(firstColumn_int, lastColumnPlusOne_int)))     #creating a list that contains a range of column labels (example: range of years)
 
 
 
