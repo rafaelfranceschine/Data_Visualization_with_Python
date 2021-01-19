@@ -28,8 +28,8 @@ df.describe()     #returning statistics of the dataframe
 df.isnull().sum()      #returning the number of null datas of each column of the the dataframe
 all(isinstance(column, str) for column in df.columns)     #checking if all columns labels are strings
 
-df.loc[rows_strList,columns_strList]     #returning a dataframe with the specified rows and columns
-df[[ColumnLabels_List]]     #returning a dataframe with the specified columns
+df.loc[rows_strList, acolumns_strList]     #returning a dataframe with the specified rows and columns
+df[ColumnLabels_List]     #returning a dataframe with the specified columns
 
 
 
@@ -42,7 +42,7 @@ df.rename(columns={OldLabel_str: NewLabel_str, OldLabel_str: NewLabel_str}, inpl
 df.replace(OldValue, NewValue)     #replace the values of the dataframe
 df.columns = list(map(str, df.columns))     #changing all of the column labels to strings
 df.set_index(columnLabel_str, inplace=True)     #set a specific column as the index
-df.sort_values([column_str], ascending=False, axis=0, inplace=True)     #sorting the dataframe based on a specific column
+df.sort_values([columnLabel_str], ascending=False, axis=0, inplace=True)     #sorting the dataframe based on a specific column
 
 
 
@@ -90,7 +90,7 @@ df.plot(kind=str, stacked=bool, figsize=(x_int, y_int), alpha=tranparency_float,
 plt.title(title_str)     #setting the title of the chart
 plt.ylabel(title_str)     #setting the title of the y label
 plt.xlabel(title_str)     #setting the title of the x label
-plt.text(x_int,y_int,label_str)     #adding a label in the the chart
+plt.text(x_int, y_int, label_str)     #adding a label in the the chart
 
 plt.show()     #showing the plot
 
@@ -99,7 +99,7 @@ plt.show()     #showing the plot
 #PLOTTING WITH ARTIST LAYER
 #--------------------------------------------------------------------------
 
-ax = df.plot(kind='chart kind',stacked=bool,figsize=(x,y))     #returning the plotting to the object ax
+ax = df.plot(kind=str, stacked=bool, figsize=(x, y))     #returning the plotting to the object ax
 
 ax.title(title_str)     #setting the title of the chart
 ax.ylabel(title_str)     #setting the title of the y label
