@@ -43,7 +43,7 @@ df.columns = list(map(str, df.columns))     #changing all of the column labels t
 df.rename(columns={OldLabel_str: NewLabel_str, OldLabel_str: NewLabel_str}, inplace=True)     #renaming the specified column labels
 
 df.set_index(columnLabel_str, inplace=True)     #setting a specific column as the index
-df.index = df.index.map(type)     #changing the index to a specified type
+df.index = df.index.map(type)     #changing the index for a specific type
 
 df.sort_values([columnLabel_str], ascending=False, axis=0, inplace=True)     #sorting the dataframe based on a specific column
 
@@ -60,7 +60,7 @@ variable = list(map(str, range(firstColumn_int, lastColumnPlusOne_int)))     #cr
 
 
 
-#CREATING AND EDITING NEW DATAFRAMES
+#CREATING AND EDITING A NEW DATAFRAME
 #--------------------------------------------------------------------------
 
 new_df = df
@@ -89,15 +89,23 @@ for name, hex in matplotlib.colors.cnames.items():
 
 
 
+#PREPPING FOR PLOTTING
+#--------------------------------------------------------------------------
+
+new_df.index = new_df.index.map(type)     #changing the index for a specific type
+
+
+
 #PLOTTING WITH SCRIPTING LAYER
 #--------------------------------------------------------------------------
 
-df.plot(kind=str, stacked=bool, figsize=(x_int, y_int), alpha=tranparency_float, xticks=bin_edges, color=strList)     #creating the plot
+new_df.plot(kind=str, figsize=(x_int, y_int), stacked=bool, alpha=float, color=strList)     #creating the plot
 
 plt.title(title_str)     #setting the title of the chart
 plt.ylabel(title_str)     #setting the title of the y label
 plt.xlabel(title_str)     #setting the title of the x label
 plt.text(x_int, y_int, label_str)     #adding a label in the the chart
+plt.annotate()     #adding annotations (example: arrow) (obs.: search matplotlib website for more informations)
 
 plt.show()     #showing the plot
 
@@ -106,10 +114,11 @@ plt.show()     #showing the plot
 #PLOTTING WITH ARTIST LAYER
 #--------------------------------------------------------------------------
 
-ax = df.plot(kind=str, stacked=bool, figsize=(x, y))     #returning the plotting to the object ax
+ax = new_df.plot(kind=str, figsize=(x, y), stacked=bool, alpha=float, color=strList)     #assigning the plot to the object ax
 
 ax.title(title_str)     #setting the title of the chart
 ax.ylabel(title_str)     #setting the title of the y label
 ax.xlabel(title_str)     #setting the title of the x label
+ax.text(x_int, y_int, label_str)     #adding a label to the chart
 
 
