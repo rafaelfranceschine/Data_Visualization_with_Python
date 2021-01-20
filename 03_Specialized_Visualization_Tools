@@ -70,6 +70,7 @@ df_new = df_new[ColumnLabels_List]     #creating a dataframe with the specified 
 df_new = df_new.head()     #creating a dataframe with the first five rows
 df_new = df_new.tail()     #creating a dataframe with the last five rows
 df_new = df_new.transpose()     #creating a new transposed dataframe
+df_new = df_new.groupby(GroupName_str, axis=0).sum()     #creat a new dataframe that sums the previous rows in the rows of each group
 
 
 
