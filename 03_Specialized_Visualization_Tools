@@ -65,12 +65,19 @@ variable = list(map(str, range(firstColumn_int, lastColumnPlusOne_int)))     #cr
 
 df_new = df
 
-df_new = df_new.loc[rows_strList,columns_strList]     #creating a dataframe with the specified rows and columns
-df_new = df_new[ColumnLabels_List]     #creating a dataframe with the specified columns
-df_new = df_new.head()     #creating a dataframe with the first five rows
-df_new = df_new.tail()     #creating a dataframe with the last five rows
-df_new = df_new.transpose()     #creating a new transposed dataframe
-df_new = df_new.groupby(GroupName_str, axis=0).sum()     #creat a new dataframe that sums the previous rows in the rows of each group
+df_new = df.head()     #creating a dataframe with the first five rows
+df_new = df.tail()     #creating a dataframe with the last five rows
+
+df_new = df.transpose()     #creating a new transposed dataframe
+
+df_new = df[ColumnLabels_List]     #creating a dataframe with the specified columns
+
+df_new = df.loc[rows_strList, columns_strList]     #creating a dataframe with specified rows and columns
+
+df_new = df.groupby(GroupName_str, axis=0).sum()     #creating a dataframe that sums the previous rows in the rows of each group
+
+df_new = df.loc[:, columns_strList].sum(axis=1)     #creating a dataframe with all rows and sum of specified columns
+df_new = pd.DataFrame({columnLabel: df, columnLabel: df}) 
 
 
 
