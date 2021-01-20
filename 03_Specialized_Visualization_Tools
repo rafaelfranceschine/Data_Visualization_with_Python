@@ -105,7 +105,7 @@ plt.title(title_str)     #setting the title of the chart
 plt.ylabel(title_str)     #setting the title of the y label
 plt.xlabel(title_str)     #setting the title of the x label
 
-plt.text(x_int, y_int, label_str)     #adding a label in the the chart
+plt.text(x_int, y_int, label_str)     #creting a label in the the chart
 plt.annotate()     #adding annotations (example: arrow) (obs.: search matplotlib website for more informations)
 
 plt.show()     #showing the plot
@@ -115,18 +115,42 @@ plt.show()     #showing the plot
 #PLOTTING WITH ARTIST LAYER
 #--------------------------------------------------------------------------
 
-ax = new_df.plot(kind=str, figsize=(x, y), stacked=bool, alpha=float, color=strList)     #assigning the plot to an axis object
+ax = new_df.plot(kind=str, figsize=(x, y), stacked=bool, alpha=float, color=strList)     #assign the plot to an axis object
 
-ax.function(title_str)     #editing the chart
+ax.function(title_str)     #edit the chart
+
+
+
+#CREATING SUBPLOTS
+#--------------------------------------------------------------------------
+
+fig = plt.figure()     #create a figure
+
+ax0 = fig.add_subplot(nrows, ncols, plot_number)     #create subplot 1
+ax1 = fig.add_subplot(nrows, ncols, plot_number)     #create subplot 2
+
+# Subplot 1: type 1
+df.plot(kind=str, ax=ax0)     #add to subplot 1
+ax0.set_title(title_str)
+ax0.set_xlabel(title_str)
+ax0.set_ylabel(title_str)
+
+# Subplot 2: type 2
+df.plot(kind=str, ax=ax1)     #add to subplot 2
+ax1.set_title(title_str)
+ax1.set_ylabel(title_str)
+ax1.set_xlabel(title_str)
+
+plt.show()
 
 
 
 #DATAFRAME AND PLOT OF PIE CHART
 #--------------------------------------------------------------------------
 
-df_group = df.groupby(GroupName_str, axis=0).sum()     #creating a new dataframe that sums the previous rows in the rows of each group
+df_group = df.groupby(GroupName_str, axis=0).sum()     #creat a new dataframe that sums the previous rows in the rows of each group
 
-colors_list = [color_str, color_str]     #list of colors of each group
+colors_list = [color_str, color_str]     #create a list of colors of each group
 explode_list = [ratio_float, ratio_float]     #ratio for each group with which to offset each wedge.
 
 df_group[columnLabel_str].plot(kind='pie', figsize=(x_float, y_float), autopct='%1.1f%%',  startangle=float, shadow=bool, labels=None,
@@ -143,7 +167,7 @@ plt.show()
 #DATAFRAME AND PLOT FOR BOX PLOT
 #--------------------------------------------------------------------------
 
-df.plot(kind='box')
+df.plot(kind='box', vert=bool)
 
 plt.title(Tttle_str)
 plt.ylabel(title_str)
