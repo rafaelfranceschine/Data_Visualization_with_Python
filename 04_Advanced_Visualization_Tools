@@ -1,0 +1,229 @@
+#IMPORTING LIBRARIES
+#--------------------------------------------------------------------------
+
+import pandas as pd     #importing the pandas primary data structure library
+import numpy as np     #importing the useful numpy scientific computing library
+
+
+
+#IMPORTING DATAFRAMES
+#--------------------------------------------------------------------------
+
+df = pd.read_format(path)     #importing the dataframes (obs.: check the pandas website for informations about each format)
+
+!conda install -c anaconda xlrd --yes     #downloading pandas module that is required to read in excel files
+df = pd.read_excel(path, sheet_name=str, skiprows=range(int), skipfooter=numberOfRowsToSkip_int)     #importing the dataframe from excel
+
+
+
+#CHECKING THE DATAFRAME
+#--------------------------------------------------------------------------
+
+df.head()     #returning the first rows of the dataframe
+df.tail()     #returning the last rows of the dataframe
+df.shape     #returning the dimensions of the dataframe
+df.columns     #returning the names of all of the columns
+df.index     #returning the index of the dataframe
+df.describe()     #returning statistics of the dataframe
+df.isnull().sum()      #returning the number of null datas of each column of the the dataframe
+all(isinstance(column, str) for column in df.columns)     #checking if all columns labels are strings
+
+df.loc[rows_strList, acolumns_strList]     #returning a dataframe with the specified rows and columns
+df[ColumnLabels_List]     #returning a dataframe with the specified columns
+
+
+
+#CLEARING THE DATAFRAME
+#--------------------------------------------------------------------------
+
+df.dropna()     #drop the rows where at least one element is missing
+df.drop(ColumnLabels_list, axis=1, inplace=True)     #dropping the columns that aren't necessary ("axis=1" is for columns)
+
+df.columns = list(map(str, df.columns))     #changing all of the column labels to strings
+df.columns = [ColumnLabel, ColumnLabel]     #renaming the column labels
+df.rename(columns={OldLabel_str: NewLabel_str, OldLabel_str: NewLabel_str}, inplace=True)     #renaming the specified column labels
+
+df.set_index(columnLabel_str, inplace=True)     #setting a specific column as the index
+df.index = df.index.map(type)     #changing the index for a specific type
+df.reset_index(inplace=True)     #reset the index to put in back in as a column in the df dataframe
+
+
+df.sort_values([columnLabel_str], ascending=False, axis=0, inplace=True)     #sorting the dataframe based on a specific column
+
+df.replace(OldValue, NewValue)     #replace the specified values of the dataframe (example: replace missing data for an average value)
+
+df[ColumnLabel_str] = df.function(axis=1)     #adding a column that is a function of all of the others (example of functions: sum, max, min)
+
+
+
+#CREATING VARIABLES OF THE DATAFRAME
+#--------------------------------------------------------------------------
+
+variable = list(map(str, range(firstColumn_int, lastColumnPlusOne_int)))     #creating a list that contains a range of column labels (example: range of years)
+
+
+
+#CREATING AND EDITING A NEW DATAFRAME
+#--------------------------------------------------------------------------
+
+df_new = df
+
+df_new = df.head()     #creating a dataframe with the first five rows
+df_new = df.tail()     #creating a dataframe with the last five rows
+
+df_new = df.transpose()     #creating a new transposed dataframe
+
+df_new = df[ColumnLabels_List]     #creating a dataframe with the specified columns
+
+df_new = df.loc[rows_strList, columns_strList]     #creating a dataframe with specified rows and columns
+
+df_new = pd.DataFrame(df[columnLabel_strList].sum(axis=0))     #creating a dataframe with the sum of the columns
+
+df_new = df.groupby(GroupName_str, axis=0).sum()     #creating a dataframe that sums the previous rows in the rows of each group
+
+df_new = df.loc[:, columns_strList].sum(axis=1)     #creating a dataframe with all rows and sum of specified columns
+df_new = pd.DataFrame({columnLabel: df, columnLabel: df}) 
+
+
+
+#IMPORTING AND SETTING MATPLOTLIB
+#--------------------------------------------------------------------------
+
+%matplotlib inline     #downloading the inline backend to generate the plots within the browser
+import matplotlib as mpl     #importing the matplotlib as mpl
+import matplotlib.pyplot as plt     #importing the matplotlib.pyplot as plt
+
+mpl.style.use(style_str)     #setting a style to the plot
+
+print('Matplotlib version:', mpl.__version__)     #checking the version of matplotlib
+
+for name, hex in matplotlib.colors.cnames.items():
+    print(name, hex)     #checking the full list of available colors
+
+
+
+#PREPPING FOR PLOTTING
+#--------------------------------------------------------------------------
+
+new_df.index = new_df.index.map(type)     #changing the index for a specific type
+
+
+
+#PLOTTING WITH SCRIPTING LAYER
+#--------------------------------------------------------------------------
+
+new_df.plot(kind=str, figsize=(x_int, y_int), stacked=bool, alpha=float, color=strList)     #creating the plot
+
+plt.title(title_str)     #setting the title of the chart
+plt.ylabel(title_str)     #setting the title of the y label
+plt.xlabel(title_str)     #setting the title of the x label
+
+plt.text(x_int, y_int, label_str)     #creting a label in the the chart
+plt.annotate()     #adding annotations (example: arrow) (obs.: search matplotlib website for more informations)
+
+plt.show()     #showing the plot
+
+
+
+#PLOTTING WITH ARTIST LAYER
+#--------------------------------------------------------------------------
+
+ax = new_df.plot(kind=str, figsize=(x, y), stacked=bool, alpha=float, color=strList)     #assign the plot to an axis object
+
+ax.function(title_str)     #edit the chart
+
+
+
+#CREATING SUBPLOTS WITH ARTIST LAYER
+#--------------------------------------------------------------------------
+
+fig = plt.figure()     #create a figure
+
+ax0 = fig.add_subplot(nrows, ncols, plot_number)     #create subplot 1
+ax1 = fig.add_subplot(nrows, ncols, plot_number)     #create subplot 2
+
+# Subplot 1: type 1
+df.plot(kind=str, ax=ax0)     #add to subplot 1
+ax0.set_title(title_str)
+ax0.set_xlabel(title_str)
+ax0.set_ylabel(title_str)
+
+# Subplot 2: type 2
+df.plot(kind=str, ax=ax1)     #add to subplot 2
+ax1.set_title(title_str)
+ax1.set_ylabel(title_str)
+ax1.set_xlabel(title_str)
+
+plt.show()
+
+
+
+#DATAFRAME AND PLOT OF PIE CHART
+#--------------------------------------------------------------------------
+
+df_group = df.groupby(GroupName_str, axis=0).sum()     #creat a new dataframe that sums the previous rows in the rows of each group
+
+colors_list = [color_str, color_str]     #create a list of colors of each group
+explode_list = [ratio_float, ratio_float]     #ratio for each group with which to offset each wedge.
+
+df_group[columnLabel_str].plot(kind='pie', figsize=(x_float, y_float), autopct='%1.1f%%',  startangle=float, shadow=bool, labels=None,
+                               pctdistance=float, colors=colors_list, explode=explode_list)
+
+plt.title(str, y=float) 
+plt.axis(str)
+plt.legend(labels=df_group.index, loc='upper left')
+
+plt.show()
+
+
+
+#DATAFRAME AND PLOT FOR BOX PLOT
+#--------------------------------------------------------------------------
+
+df.plot(kind='box', vert=bool)
+
+plt.title(title_str)
+plt.ylabel(title_str)
+
+plt.show()
+
+
+
+#DATAFRAME AND PLOT FOR SCATTER PLOT
+#--------------------------------------------------------------------------
+
+x = df[columnLabel]      #values on x-axis
+y = df[columnLabel]     #values on y-axis
+fit = np.polyfit(x, y, deg=1)     #training the data
+
+df.plot(kind='scatter', x=columnLabel, y=columnLabel)
+
+plt.title(title_str)
+plt.xlabel(title_str)
+plt.ylabel(title_str)
+
+plt.plot(x, fit[0] * x + fit[1])     #plotting the curve of regression fit
+plt.annotate('y={0:.0f} x + {1:.0f}'.format(fit[0], fit[1]), xy=(2000, 150000))     #annotating the regression equation
+
+plt.show()
+
+
+
+#DATAFRAME AND PLOT FOR BUBBLE PLOT
+#--------------------------------------------------------------------------
+
+# normalize column data
+norm_column1 = (df[ColumnLabel] - df[ColumnLabel].min()) / (df[ColumnLabel].max() - df[ColumnLabel].min())
+norm_column2 = (df[ColumnLabel] - df[ColumnLabel].min()) / (df[ColumnLabel].max() - df[ColumnLabel].min())
+
+# first axis
+ax0 = df.plot(kind='scatter', x=columnLabel, y=columnLabel, s=norm_column1)
+ax1 = df.plot(kind='scatter', x=columnLabel, y=columnLabel, s=norm_column2, ax = ax0)
+
+ax0.set_ylabel(title_str)
+ax0.set_title(title_str)
+ax0.legend([ColumnLabel, ColumnLabel, loc='upper left', fontsize='x-large')
+
+
+
+
